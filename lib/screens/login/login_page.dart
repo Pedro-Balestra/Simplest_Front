@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 10,
               ),
-              button("Entrar"),
+              button("Entrar", context, 'login'),
               const Align(
                 alignment: Alignment.center,
                 child: Padding(
@@ -78,7 +78,9 @@ class _LoginPageState extends State<LoginPage> {
               Align(
                 alignment: Alignment.center,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'signIn');
+                  },
                   child: RichText(
                     text: TextSpan(
                       text: 'Não tem uma Conta?',
