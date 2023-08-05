@@ -3,16 +3,16 @@ import 'package:simples_front_end/utils/appColors.dart';
 import 'package:simples_front_end/utils/widgetButton.dart';
 import 'package:simples_front_end/utils/widgetTextfield.dart';
 
-import 'animation_login.dart';
+import 'animation_signUp.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _SignInPageState extends State<SignInPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              animationSignIn(),
+              animationSignUp(),
               const SizedBox(
                 height: 40,
               ),

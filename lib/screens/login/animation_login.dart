@@ -7,7 +7,7 @@ Widget animationLogin() {
       top: 70,
     ),
     child: Lottie.asset(
-      "assets/lottie/Profile.json",
+      "assets/lottie/Profile1.json",
       width: 193,
       height: 193,
       fit: BoxFit.fill,

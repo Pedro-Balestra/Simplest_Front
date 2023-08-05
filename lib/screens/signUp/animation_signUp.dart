@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-Widget animationSignIn() {
+Widget animationSignUp() {
   return Container(
     margin: const EdgeInsets.only(
       top: 70,
