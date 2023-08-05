@@ -1,10 +1,10 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:permission_handler/permission_handler.dart';
+// import 'package:permission_handler/permission_handler.dart';
 import 'package:simples_front_end/screens/home/menu_drawer/drawer.dart';
 import 'package:simples_front_end/utils/appColors.dart';
 
@@ -16,42 +16,45 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  FilePickerResult? result;
-  String? _fileText;
-  PlatformFile? pickedFile;
-  bool isLoading = false;
-  File? fileToDisplay;
+  // FilePickerResult? result;
+  // String? _fileText;
+  // PlatformFile? pickedFile;
+  // bool isLoading = false;
+  // File? fileToDisplay;
 
-  void pickFile() async {
-    try {
-      // Verificar e solicitar a permissão de leitura externa
-      var status = await Permission.storage.status;
-      if (!status.isGranted) {
-        await Permission.storage.request();
-        status = await Permission.storage.status;
-        if (!status.isGranted) {
-          print("Permission denied");
-          return;
-        }
-      }
+  // void pickFile() async {
+  //   try {
+  //     // Verificar e solicitar a permissão de leitura externa
+  //     var status = await Permission.storage.status;
+  //     if (!status.isGranted) {
+  //       await Permission.storage.request();
+  //       status = await Permission.storage.status;
+  //       if (!status.isGranted) {
+  //         print("Permission denied");
+  //         return;
+  //       }
+  //     }
 
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['pdf'],
-      );
+  //     FilePickerResult? result = await FilePicker.platform.pickFiles(
+  //       type: FileType.custom,
+  //       allowedExtensions: ['pdf'],
+  //     );
 
-      if (result == null) return;
-    } catch (e) {
-      print(e.toString());
-    }
-  }
+  //     if (result == null) return;
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          pickFile();
+        onPressed: () async {
+          FilePickerResult? result = await FilePicker.platform.pickFiles(
+            type: FileType.custom,
+            allowedExtensions: ['pdf'],
+          );
         },
         backgroundColor: AppColors.primaryColor,
         child: const Icon(Icons.add, size: 25),
