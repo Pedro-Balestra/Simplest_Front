@@ -13,6 +13,10 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController nomeController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,24 +33,27 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(
                 height: 40,
               ),
-              textFieldContainer("Nome Completo", TextInputType.name, false),
-              const SizedBox(
-                height: 20,
-              ),
-              textFieldContainer("Email", TextInputType.emailAddress, false),
-              const SizedBox(
-                height: 20,
-              ),
-              textFieldContainer("Telefone", TextInputType.phone, false),
-              const SizedBox(
-                height: 20,
-              ),
-              textFieldContainer("Senha", TextInputType.visiblePassword, true),
+              textFieldContainer(
+                  "Nome Completo", TextInputType.name, false, nomeController),
               const SizedBox(
                 height: 20,
               ),
               textFieldContainer(
-                  "Confirmar Senha", TextInputType.visiblePassword, true),
+                  "Email", TextInputType.emailAddress, false, emailController),
+              const SizedBox(
+                height: 20,
+              ),
+              textFieldContainer("Telefone", TextInputType.phone, false, null),
+              const SizedBox(
+                height: 20,
+              ),
+              textFieldContainer("Senha", TextInputType.visiblePassword, true,
+                  senhaController),
+              const SizedBox(
+                height: 20,
+              ),
+              textFieldContainer("Confirmar Senha",
+                  TextInputType.visiblePassword, true, senhaController),
               const SizedBox(
                 height: 20,
               ),
