@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "43080076226",
+    "project_id": "simplest-68d85",
+    "storage_bucket": "simplest-68d85.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43080076226:android:fdeeaea8c2a5e7eaa3645b",
+        "android_client_info": {
+          "package_name": "com.example.simples_front_end"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43080076226-tkd82qvo92f3i3funfhqe39grui9rmns.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfUVykEy1zxDQwgWd4n7zMzA2YhUYeoAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "43080076226-tkd82qvo92f3i3funfhqe39grui9rmns.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "43080076226-rrml5i4mk4b8213222sdenpo8cl2jeei.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.simplesFrontEnd"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
