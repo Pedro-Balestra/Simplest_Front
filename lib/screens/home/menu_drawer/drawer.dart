@@ -36,6 +36,7 @@ Widget menuDrawer(context) {
         routesDrawer('Histórico', 'login', context, Icons.description),
         routesDrawer('Perfil', 'login', context, Icons.person),
         routesDrawer('Sobre Nós', 'login', context, Icons.info_rounded),
+        routesDrawer('Sair', 'login', context, Icons.arrow_circle_left),
       ],
     ),
   );

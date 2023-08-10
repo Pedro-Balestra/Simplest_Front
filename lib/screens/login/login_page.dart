@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 10,
               ),
-              button("Entrar", context, 'home'),
+              button("Entrar", context, 'home', () {}),
               const Align(
                 alignment: Alignment.center,
                 child: Padding(

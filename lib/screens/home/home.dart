@@ -55,6 +55,7 @@ class _HomeState extends State<Home> {
             type: FileType.custom,
             allowedExtensions: ['pdf'],
           );
+          print(result);
         },
         backgroundColor: AppColors.primaryColor,
         child: const Icon(Icons.add, size: 25),
