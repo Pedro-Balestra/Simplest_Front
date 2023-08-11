@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simples_front_end/utils/appColors.dart';
 
-Widget button(label, context, route, function()) {
+Widget button(label, context, route, Function() function) {
   return Container(
     height: 40,
     width: 210,

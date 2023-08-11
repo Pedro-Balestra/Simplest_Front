@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simples_front_end/screens/login/animation_login.dart';
@@ -17,6 +18,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
+  FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 10,
               ),
-              button("Entrar", context, 'home', () {}),
+              button("Entrar", context, 'login', login),
               const Align(
                 alignment: Alignment.center,
                 child: Padding(
@@ -105,5 +107,30 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  login() async {
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: emailController.text, password: senhaController.text);
+      if (userCredential.user != null) {
+        Navigator.pushNamed(context, 'home');
+        print('sucess');
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Usuário não encotrado'),
+          ),
+        );
+      } else if (e.code == 'wrong-password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Sua senha esta errada'),
+          ),
+        );
+      }
+    }
   }
 }
