@@ -3,10 +3,12 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simples_front_end/screens/home/graph/graph.dart';
+import 'package:simples_front_end/screens/home/extrato/extrato.dart';
 // import 'package:permission_handler/permission_handler.dart';
 import 'package:simples_front_end/screens/home/menu_drawer/drawer.dart';
 import 'package:simples_front_end/utils/appColors.dart';
+
+import '../../model/dados.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,7 +18,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  double total = 5764.75;
+  double total = 0.0;
+  void calculaTotal() {
+    for (var dado in dados) {
+      double valor = dado["Valor"];
+      total += valor;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    calculaTotal();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,14 +64,14 @@ class _HomeState extends State<Home> {
               child: Padding(
                 padding: const EdgeInsets.only(top: 25.0),
                 child: Text(
-                  "R\$ $total",
+                  "R\$ ${total.toStringAsFixed(2)}",
                   style: GoogleFonts.poppins(
                       fontSize: 40, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
           ),
-          Graph(),
+          const Extrato(),
         ],
       ),
     );
