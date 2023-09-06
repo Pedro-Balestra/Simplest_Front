@@ -5,7 +5,7 @@ import 'package:simples_front_end/utils/appColors.dart';
 import '../../../model/dados.dart';
 
 class Extrato extends StatefulWidget {
-  const Extrato({super.key});
+  const Extrato({Key? key}) : super(key: key);
 
   @override
   State<Extrato> createState() => _ExtratoState();
@@ -13,6 +13,7 @@ class Extrato extends StatefulWidget {
 
 class _ExtratoState extends State<Extrato> {
   double total = 0.0;
+
   void calculaTotal() {
     for (var dado in dados) {
       double valor = dado["Valor"];
@@ -59,32 +60,50 @@ class _ExtratoState extends State<Extrato> {
               child: CircularProgressIndicator(),
             ),
           )
-        : Container(
-            constraints:
-                BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
-            child: SingleChildScrollView(
-              physics: const ScrollPhysics(),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 50.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            buildCategoryColumn(),
-                            buildValueColumn(),
-                            buildPercentageColumn(),
-                          ],
-                        ),
+        : Expanded(
+            child: Container(
+              color: AppColors.primaryColor, // Cor de fundo da tela
+
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                  ),
+                  child: Container(
+                    height: 450,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.black),
+                      color: Colors.white, // Cor do container branco
+                    ),
+                    constraints: BoxConstraints(
+                      maxHeight: MediaQuery.of(context).size.height,
+                    ),
+                    child: SingleChildScrollView(
+                      physics: const ScrollPhysics(),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 15.0,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                buildCategoryColumn(),
+                                buildValueColumn(),
+                                buildPercentageColumn(),
+                              ],
+                            ),
+                          ),
+                          // Lista dinâmica das categorias, valores e porcentagens
+                        ],
                       ),
-                      // Lista dinâmica das categorias, valores e porcentagens
-                    ],
-                  )
-                ],
+                    ),
+                  ),
+                ),
               ),
             ),
           );
@@ -100,6 +119,9 @@ class _ExtratoState extends State<Extrato> {
             color: AppColors.buttonText,
             fontWeight: FontWeight.bold,
           ),
+        ),
+        const SizedBox(
+          height: 10,
         ),
         for (var categoria in categoryTotals.keys)
           Padding(
@@ -120,18 +142,21 @@ class _ExtratoState extends State<Extrato> {
     return Column(
       children: [
         Text(
-          "Valor",
+          "R\$",
           style: GoogleFonts.poppins(
             fontSize: 18,
             color: AppColors.buttonText,
             fontWeight: FontWeight.bold,
           ),
         ),
+        const SizedBox(
+          height: 10,
+        ),
         for (var categoria in categoryTotals.keys)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Text(
-              "R\$ ${categoryTotals[categoria]!.toStringAsFixed(2)}",
+              categoryTotals[categoria]!.toStringAsFixed(2),
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 color: AppColors.buttonText,
@@ -146,18 +171,22 @@ class _ExtratoState extends State<Extrato> {
     return Column(
       children: [
         Text(
-          "Porcentagem",
+          "%",
           style: GoogleFonts.poppins(
             fontSize: 18,
             color: AppColors.buttonText,
             fontWeight: FontWeight.bold,
           ),
         ),
+        const SizedBox(
+          height: 10,
+        ),
         for (var categoria in categoryTotals.keys)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.0),
             child: Text(
-              "${calculaPercentual(categoryTotals[categoria]!, total).toStringAsFixed(2)}%",
+              calculaPercentual(categoryTotals[categoria]!, total)
+                  .toStringAsFixed(2),
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 color: AppColors.buttonText,
