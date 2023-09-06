@@ -63,7 +63,6 @@ class _ExtratoState extends State<Extrato> {
         : Expanded(
             child: Container(
               color: AppColors.primaryColor, // Cor de fundo da tela
-
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.only(
@@ -72,10 +71,19 @@ class _ExtratoState extends State<Extrato> {
                   ),
                   child: Container(
                     height: 450,
+                    width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: Colors.black),
                       color: Colors.white, // Cor do container branco
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.5), // Cor da sombra
+                          spreadRadius: 5, // Raio de espalhamento
+                          blurRadius: 10, // Raio de desfoque
+                          offset: const Offset(0, 3), // Deslocamento da sombra
+                        ),
+                      ],
                     ),
                     constraints: BoxConstraints(
                       maxHeight: MediaQuery.of(context).size.height,
