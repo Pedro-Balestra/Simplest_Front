@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
           );
           print(result);
         },
-        backgroundColor: AppColors.primaryColor,
+        backgroundColor: AppColors.secondaryColor,
         child: const Icon(Icons.add, size: 25),
       ),
       extendBodyBehindAppBar: true,
@@ -56,18 +56,13 @@ class _HomeState extends State<Home> {
         children: [
           Container(
             width: double.infinity,
-            height: 200,
-            decoration: BoxDecoration(
-              gradient: backgroundApp(),
-            ),
+            height: 250,
+            color: AppColors.primaryColor,
             child: Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 25.0),
-                child: Text(
-                  "R\$ ${total.toStringAsFixed(2)}",
-                  style: GoogleFonts.poppins(
-                      fontSize: 40, fontWeight: FontWeight.bold),
-                ),
+              child: Text(
+                "R\$ ${total.toStringAsFixed(2)}",
+                style: GoogleFonts.poppins(
+                    fontSize: 40, fontWeight: FontWeight.bold),
               ),
             ),
           ),

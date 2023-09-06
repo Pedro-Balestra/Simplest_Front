@@ -11,9 +11,7 @@ Widget menuDrawer(context) {
         Container(
           width: double.infinity,
           height: 250,
-          decoration: BoxDecoration(
-            gradient: backgroundApp(),
-          ),
+          color: AppColors.primaryColor,
           child: Center(
             child: Column(
               children: [

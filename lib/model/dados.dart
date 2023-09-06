@@ -308,7 +308,7 @@ List<Map<String, dynamic>> dados = [
     "Empresa": "Iwata Sushi",
     "Valor": 1200.0,
     "Parcelas": "0",
-    "Categoria": "Test1",
+    "Categoria": "test1",
     "Produto": "Sushi",
   },
   {
@@ -317,6 +317,14 @@ List<Map<String, dynamic>> dados = [
     "Valor": 1200.0,
     "Parcelas": "0",
     "Categoria": "test2",
+    "Produto": "Sushi",
+  },
+  {
+    "Data": "29/jul",
+    "Empresa": "Iwata Sushi",
+    "Valor": 1200.0,
+    "Parcelas": "0",
+    "Categoria": "test3",
     "Produto": "Sushi",
   },
   {
