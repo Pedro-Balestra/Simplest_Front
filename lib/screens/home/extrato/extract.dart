@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simples_front_end/utils/appColors.dart';
-
 import '../../../model/dados.dart';
+import 'categoryPurschase.dart';
 
 class Extrato extends StatefulWidget {
   const Extrato({Key? key}) : super(key: key);
@@ -132,13 +132,31 @@ class _ExtratoState extends State<Extrato> {
           height: 10,
         ),
         for (var categoria in categoryTotals.keys)
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
-            child: Text(
-              categoria,
-              style: GoogleFonts.poppins(
-                fontSize: 16,
-                color: AppColors.buttonText,
+          InkWell(
+            onTap: () {
+              // Navegue para a tela de detalhes da categoria
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CategoryPurchasesScreen(
+                    category: categoria,
+                    purchases: dados
+                        .where(
+                          (dado) => dado["Categoria"] == categoria,
+                        )
+                        .toList(),
+                  ),
+                ),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5.0),
+              child: Text(
+                categoria,
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  color: AppColors.buttonText,
+                ),
               ),
             ),
           ),

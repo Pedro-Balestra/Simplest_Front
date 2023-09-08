@@ -31,6 +31,7 @@ Widget menuDrawer(context) {
             ),
           ),
         ),
+        routesDrawer('Home', 'home', context, Icons.home),
         routesDrawer('Histórico', 'login', context, Icons.description),
         routesDrawer('Perfil', 'login', context, Icons.person),
         routesDrawer('Sobre Nós', 'login', context, Icons.info_rounded),
