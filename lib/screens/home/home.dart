@@ -3,7 +3,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simples_front_end/screens/home/extrato/extrato.dart';
+import 'package:simples_front_end/screens/home/extrato/extract.dart';
 // import 'package:permission_handler/permission_handler.dart';
 import 'package:simples_front_end/screens/home/menu_drawer/drawer.dart';
 import 'package:simples_front_end/utils/appColors.dart';

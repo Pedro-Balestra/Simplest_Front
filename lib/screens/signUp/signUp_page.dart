@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:simples_front_end/model/users.dart';
 import 'package:simples_front_end/utils/appColors.dart';
-import 'package:simples_front_end/utils/widgetButton.dart';
 import 'package:simples_front_end/utils/widgetTextfield.dart';
 
 import 'animation_signUp.dart';
@@ -18,60 +18,88 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController nomeController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
+  TextEditingController confirmarSenhaController = TextEditingController();
 
   String msgErro = "";
-
-  void validaCampos() {
-    //1 Passo - Recuperar os dados
+  void validaCampos() async {
+    // 1 Passo - Recuperar os dados
     String nome = nomeController.text;
     String email = emailController.text;
-    String senha = senhaController.text;
-    //2 Passo - Validar os dados
+    String senha = senhaController.text.trim();
+    String confirmarSenha = confirmarSenhaController.text.trim();
+
+    print("Senha: '$senha'");
+    print("Confirmar Senha: '$confirmarSenha'");
+
+    // 2 Passo - Validar os dados
     if (nome.isNotEmpty) {
       if (email.isNotEmpty && email.contains("@")) {
-        if (senha.isNotEmpty && senha.length < 6) {
-          msgErro = "Preencha a senha com mais de 6 caracteres!";
+        if (senha.isNotEmpty && senha.length >= 6) {
+          if (senha == confirmarSenha) {
+            // Cadastre no banco de dados
+
+            // 1 Pass - receber os dados da interface em um objeto model
+            Users user = Users();
+
+            user.nome = nome;
+            user.senha = senha;
+            user.email = email;
+
+            try {
+              // 2 Passo - Executar o método cadastrarUsuario(user)
+              cadastrarUsuario(user);
+
+              setState(() {
+                msgErro = "";
+              });
+            } catch (erro) {
+              setState(() {
+                msgErro = "Não foi possivel cadastrar";
+              });
+            }
+          } else {
+            setState(() {
+              msgErro = "As senhas não coincidem!";
+            });
+          }
         } else {
-          //Cadastre no banco de dados
-
-          //1 Pass - recber os dados da interface em um objeto model
-          Users user = new Users();
-
-          user.nome = nome;
-          user.senha = senha;
-          user.email = email;
-
-          //2 Passo - Executar o metodo cadastrarUsuario(user)
-          cadastrarUsuario(user);
+          setState(() {
+            msgErro = "Preencha a senha com pelo menos 6 caracteres!";
+          });
         }
       }
     } else {
-      msgErro = "Preencha o campo nome!";
+      setState(() {
+        msgErro = "Preencha o campo nome!";
+      });
     }
   }
 
-  //Metodo que cadastra no Firebase o usuário
+//Metodo que cadastra no Firebase o usuário
   void cadastrarUsuario(user) async {
-    //1 Passo - instarciar o firebase
+    // 1 Passo - instanciar o Firebase
     FirebaseAuth auth = FirebaseAuth.instance;
 
-    auth
-        .createUserWithEmailAndPassword(email: user.email, password: user.senha)
-        .then(
-      (firebaseUser) {
-        const SnackBar snackBar = SnackBar(
-          content: Text("Cadastrado com sucesso"),
-          duration: Duration(seconds: 5),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      },
-    ).catchError(
-      (erro) {
-        print(
-          "Aconteceu o erro: " + erro.toString(),
-        );
-      },
-    );
+    try {
+      await auth.createUserWithEmailAndPassword(
+        email: user.email,
+        password: user.senha,
+      );
+
+      // Navegar para a próxima tela apenas se o cadastro for bem-sucedido
+      Navigator.pushNamed(context, 'login');
+
+      // Exibir a mensagem de sucesso aqui
+      const SnackBar snackBar = SnackBar(
+        content: Text("Cadastrado com sucesso"),
+        duration: Duration(seconds: 5),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } catch (erro) {
+      setState(() {
+        msgErro = "Não foi possível cadastrar";
+      });
+    }
   }
 
   @override
@@ -109,29 +137,47 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(
                 height: 20,
               ),
-              textFieldContainer("Confirmar Senha",
-                  TextInputType.visiblePassword, true, senhaController),
+              textFieldContainer(
+                  "Confirmar Senha",
+                  TextInputType.visiblePassword,
+                  true,
+                  confirmarSenhaController),
               const SizedBox(
                 height: 20,
               ),
-              // Container(
-              //   height: 40,
-              //   width: 210,
-              //   child: ElevatedButton(
-              //     onPressed: validaCampos,
-              //     style: ElevatedButton.styleFrom(
-              //       backgroundColor: AppColors.button,
-              //       foregroundColor: AppColors.buttonText,
-              //       textStyle: GoogleFonts.poppins(fontSize: 15),
-              //     ),
-              //     child: Text("cadastrar"),
-              //   ),
-              // )
-
-              button("Cadastrar", context, 'login', validaCampos),
+              buttonCadastrar("Cadastrar", context, validaCampos),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buttonCadastrar(label, context, Function() function) {
+    return Container(
+      height: 40,
+      width: 210,
+      child: ElevatedButton(
+        onPressed: () {
+          // Chame a função de validação primeiro
+          function();
+
+          // Verifique se há uma mensagem de erro e exiba-a se necessário
+          if (msgErro.isNotEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(msgErro),
+                duration: Duration(seconds: 5),
+              ),
+            );
+          }
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.button,
+          foregroundColor: AppColors.buttonText,
+          textStyle: GoogleFonts.poppins(fontSize: 15),
+        ),
+        child: Text("$label"),
       ),
     );
   }

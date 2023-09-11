@@ -8,8 +8,8 @@ Widget button(label, context, route, Function() function) {
     width: 210,
     child: ElevatedButton(
       onPressed: () {
-        Navigator.pushNamed(context, route);
         function();
+        Navigator.pushNamed(context, route);
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.button,
