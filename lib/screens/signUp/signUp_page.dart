@@ -20,8 +20,8 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController senhaController = TextEditingController();
   TextEditingController confirmarSenhaController = TextEditingController();
 
-  bool obscurePassword1 = false;
-  bool obscurePassword2 = false;
+  bool obscurePassword1 = true;
+  bool obscurePassword2 = true;
 
   String msgErro = "";
   void validaCampos() async {

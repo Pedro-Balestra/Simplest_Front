@@ -19,6 +19,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
   FirebaseAuth auth = FirebaseAuth.instance;
+  bool obscurePassword = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +42,8 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 22,
               ),
-              textFieldContainer(
-                  "Senha", TextInputType.visiblePassword, senhaController),
+              textFieldContainerObscure("Senha", TextInputType.visiblePassword,
+                  obscurePassword, senhaController),
               const SizedBox(
                 height: 10,
               ),
@@ -132,5 +134,54 @@ class _LoginPageState extends State<LoginPage> {
         );
       }
     }
+  }
+
+  Widget textFieldContainerObscure(label, keyboard, obscure, key) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.textFieldColor,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      width: double.infinity,
+      height: 60,
+      child: TextField(
+        obscureText: obscure,
+        controller: key,
+        decoration: InputDecoration(
+          labelText: "$label:",
+          hintStyle: GoogleFonts.poppins(
+            color: AppColors.textFieldTextColor,
+            fontSize: 15,
+          ),
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.only(
+            left: 34,
+            top: 5,
+          ),
+          // Adicione um ícone para alternar a visibilidade da senha
+          suffixIcon: obscure
+              ? IconButton(
+                  icon: Icon(Icons.visibility),
+                  onPressed: () {
+                    setState(() {
+                      obscurePassword = !obscurePassword;
+                    });
+                  },
+                )
+              : IconButton(
+                  icon: Icon(Icons.visibility_off),
+                  onPressed: () {
+                    setState(() {
+                      obscurePassword = !obscurePassword;
+                    });
+                  },
+                ),
+        ),
+        keyboardType: keyboard,
+      ),
+    );
   }
 }
