@@ -84,10 +84,19 @@ class _SignUpPageState extends State<SignUpPage> {
     FirebaseAuth auth = FirebaseAuth.instance;
 
     try {
-      await auth.createUserWithEmailAndPassword(
+      await auth
+          .createUserWithEmailAndPassword(
         email: user.email,
         password: user.senha,
-      );
+      )
+          .then((UserCredential userCredential) {
+        userCredential.user!.updateDisplayName(nomeController.text);
+        Navigator.pushNamed(context, 'login');
+      }).catchError((firebaseAuthException) {
+        setState(() {
+          msgErro = "Não foi possível cadastrar";
+        });
+      });
 
       // Navegar para a próxima tela apenas se o cadastro for bem-sucedido
       Navigator.pushNamed(context, 'login');

@@ -1,6 +1,7 @@
 // import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simples_front_end/screens/home/extrato/extract.dart';
@@ -18,6 +19,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  String nome = "";
+
   double total = 0.0;
   void calculaTotal() {
     for (var dado in dados) {
@@ -30,10 +35,12 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     calculaTotal();
+    pegarUsuario();
   }
 
   @override
   Widget build(BuildContext context) {
+    pegarUsuario();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -51,7 +58,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      drawer: menuDrawer(context),
+      drawer: menuDrawer(context, nome),
       body: Column(
         children: [
           Container(
@@ -70,5 +77,14 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+  }
+
+  pegarUsuario() async {
+    User? usuario = auth.currentUser;
+    if (usuario != null) {
+      setState(() {
+        nome = usuario.displayName!;
+      });
+    }
   }
 }

@@ -4,28 +4,38 @@ import 'package:lottie/lottie.dart';
 import 'package:simples_front_end/screens/home/menu_drawer/routesDrawer.dart';
 import 'package:simples_front_end/utils/appColors.dart';
 
-Widget menuDrawer(context) {
+Widget menuDrawer(context, nome) {
   return Drawer(
     child: Column(
       children: [
         Container(
           width: double.infinity,
-          height: 250,
+          height: 270,
           color: AppColors.primaryColor,
           child: Center(
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(top: 52),
+                  padding: const EdgeInsets.only(top: 30),
                   height: 200,
                   width: 200,
                   child: Lottie.asset('assets/lottie/profile_hello.json'),
                 ),
-                // const SizedBox(height: 18),
-                Text(
-                  'Olá, user',
-                  style: GoogleFonts.poppins(
-                      fontSize: 20, fontWeight: FontWeight.w500),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                      right: 8,
+                    ),
+                    child: Text(
+                      'Olá, $nome',
+                      style: GoogleFonts.poppins(
+                          fontSize: 20, fontWeight: FontWeight.w500),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 )
               ],
             ),

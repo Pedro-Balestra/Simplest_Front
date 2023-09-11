@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simples_front_end/utils/appColors.dart';
@@ -19,6 +20,17 @@ class CategoryPurchasesScreen extends StatefulWidget {
 class _CategoryPurchasesScreenState extends State<CategoryPurchasesScreen> {
   double categoryTotal = 0.0;
 
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  String nome = "";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    pegarUsuario();
+  }
+
   @override
   Widget build(BuildContext context) {
     for (var purchase in widget.purchases) {
@@ -31,7 +43,7 @@ class _CategoryPurchasesScreenState extends State<CategoryPurchasesScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      drawer: menuDrawer(context),
+      drawer: menuDrawer(context, nome),
       body: Column(
         children: [
           Container(
@@ -219,5 +231,14 @@ class _CategoryPurchasesScreenState extends State<CategoryPurchasesScreen> {
           ),
       ],
     );
+  }
+
+  pegarUsuario() async {
+    User? usuario = await auth.currentUser;
+    if (usuario != null) {
+      setState(() {
+        nome = usuario.displayName!;
+      });
+    }
   }
 }
