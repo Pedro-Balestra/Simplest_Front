@@ -4,18 +4,24 @@ import 'package:simples_front_end/utils/appColors.dart';
 
 import '../menu_drawer/drawer.dart';
 
-class CategoryPurchasesScreen extends StatelessWidget {
+class CategoryPurchasesScreen extends StatefulWidget {
   final String category;
   final List<Map<String, dynamic>> purchases;
 
-  CategoryPurchasesScreen(
+  const CategoryPurchasesScreen(
       {super.key, required this.category, required this.purchases});
 
+  @override
+  State<CategoryPurchasesScreen> createState() =>
+      _CategoryPurchasesScreenState();
+}
+
+class _CategoryPurchasesScreenState extends State<CategoryPurchasesScreen> {
   double categoryTotal = 0.0;
 
   @override
   Widget build(BuildContext context) {
-    for (var purchase in purchases) {
+    for (var purchase in widget.purchases) {
       categoryTotal += purchase["Valor"];
     }
 
@@ -90,10 +96,10 @@ class CategoryPurchasesScreen extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      buildProductColumn(purchases),
-                                      buildValueColumn(purchases),
+                                      buildProductColumn(widget.purchases),
+                                      buildValueColumn(widget.purchases),
                                       buildPercentageColumn(
-                                          purchases, categoryTotal),
+                                          widget.purchases, categoryTotal),
                                     ],
                                   ),
                                 ),

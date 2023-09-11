@@ -20,6 +20,9 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController senhaController = TextEditingController();
   TextEditingController confirmarSenhaController = TextEditingController();
 
+  bool obscurePassword1 = false;
+  bool obscurePassword2 = false;
+
   String msgErro = "";
   void validaCampos() async {
     // 1 Passo - Recuperar os dados
@@ -119,28 +122,28 @@ class _SignUpPageState extends State<SignUpPage> {
                 height: 40,
               ),
               textFieldContainer(
-                  "Nome Completo", TextInputType.name, false, nomeController),
+                  "Nome Completo", TextInputType.name, nomeController),
               const SizedBox(
                 height: 20,
               ),
               textFieldContainer(
-                  "Email", TextInputType.emailAddress, false, emailController),
+                  "Email", TextInputType.emailAddress, emailController),
               const SizedBox(
                 height: 20,
               ),
-              textFieldContainer("Telefone", TextInputType.phone, false, null),
+              textFieldContainer("Telefone", TextInputType.phone, null),
               const SizedBox(
                 height: 20,
               ),
-              textFieldContainer("Senha", TextInputType.visiblePassword, true,
-                  senhaController),
+              textFieldContainerObscure("Senha", TextInputType.visiblePassword,
+                  obscurePassword1, senhaController),
               const SizedBox(
                 height: 20,
               ),
-              textFieldContainer(
+              textFieldContainerObscure(
                   "Confirmar Senha",
                   TextInputType.visiblePassword,
-                  true,
+                  obscurePassword2,
                   confirmarSenhaController),
               const SizedBox(
                 height: 20,
@@ -149,6 +152,63 @@ class _SignUpPageState extends State<SignUpPage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget textFieldContainerObscure(label, keyboard, obscure, key) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.textFieldColor,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      width: double.infinity,
+      height: 60,
+      child: TextField(
+        obscureText: obscure,
+        controller: key,
+        decoration: InputDecoration(
+          labelText: "$label:",
+          hintStyle: GoogleFonts.poppins(
+            color: AppColors.textFieldTextColor,
+            fontSize: 15,
+          ),
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.only(
+            left: 34,
+            top: 5,
+          ),
+          // Adicione um ícone para alternar a visibilidade da senha
+          suffixIcon: obscure
+              ? IconButton(
+                  icon: const Icon(Icons.visibility),
+                  onPressed: () {
+                    setState(() {
+                      if (key == senhaController) {
+                        obscurePassword1 = !obscurePassword1;
+                      } else if (key == confirmarSenhaController) {
+                        obscurePassword2 = !obscurePassword2;
+                      }
+                    });
+                  },
+                )
+              : IconButton(
+                  icon: const Icon(Icons.visibility_off),
+                  onPressed: () {
+                    setState(() {
+                      if (key == senhaController) {
+                        obscurePassword1 = !obscurePassword1;
+                      } else if (key == confirmarSenhaController) {
+                        obscurePassword2 = !obscurePassword2;
+                      }
+                    });
+                  },
+                ),
+        ),
+        keyboardType: keyboard,
       ),
     );
   }
@@ -167,7 +227,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(msgErro),
-                duration: Duration(seconds: 5),
+                duration: const Duration(seconds: 5),
               ),
             );
           }

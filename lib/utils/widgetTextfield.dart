@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'appColors.dart';
 
-Widget textFieldContainer(label, keyboard, boolean, key) {
+Widget textFieldContainer(label, keyboard, key) {
   return Container(
     decoration: BoxDecoration(
       color: AppColors.textFieldColor,
@@ -16,7 +16,6 @@ Widget textFieldContainer(label, keyboard, boolean, key) {
     width: double.infinity,
     height: 60,
     child: TextField(
-      obscureText: boolean,
       controller: key,
       decoration: InputDecoration(
         labelText: "$label:",

@@ -36,12 +36,12 @@ class _LoginPageState extends State<LoginPage> {
                 height: 99,
               ),
               textFieldContainer(
-                  "Email", TextInputType.emailAddress, false, emailController),
+                  "Email", TextInputType.emailAddress, emailController),
               const SizedBox(
                 height: 22,
               ),
-              textFieldContainer("Senha", TextInputType.visiblePassword, true,
-                  senhaController),
+              textFieldContainer(
+                  "Senha", TextInputType.visiblePassword, senhaController),
               const SizedBox(
                 height: 10,
               ),
