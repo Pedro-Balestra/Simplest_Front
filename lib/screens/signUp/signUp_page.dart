@@ -18,7 +18,6 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController nomeController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
-  TextEditingController telefoneController = TextEditingController();
   TextEditingController confirmarSenhaController = TextEditingController();
 
   bool obscurePassword1 = true;
@@ -138,8 +137,7 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(
                 height: 20,
               ),
-              textFieldContainer(
-                  "Telefone", TextInputType.number, telefoneController),
+              textFieldContainer("Telefone", TextInputType.number, null),
               const SizedBox(
                 height: 20,
               ),

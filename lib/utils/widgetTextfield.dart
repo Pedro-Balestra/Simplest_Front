@@ -22,10 +22,8 @@ Widget textFieldContainer(label, keyboard, key) {
         hintStyle: GoogleFonts.poppins(
             color: AppColors.textFieldTextColor, fontSize: 15),
         border: InputBorder.none,
-        contentPadding: const EdgeInsets.only(
-          left: 34,
-          top: 5,
-        ),
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
       ),
       keyboardType: keyboard,
     ),
@@ -43,20 +41,21 @@ Widget textFieldProfile(keyboard, key, str, read) {
     margin: const EdgeInsets.symmetric(horizontal: 20),
     width: double.infinity,
     height: 60,
-    child: TextFormField(
-      readOnly: read,
-      // controller: key,
-      initialValue: str,
-      decoration: InputDecoration(
-        hintStyle: GoogleFonts.poppins(
-            color: AppColors.textFieldTextColor, fontSize: 15),
-        border: InputBorder.none,
-        contentPadding: const EdgeInsets.only(
-          left: 34,
-          top: 5,
+    child: Center(
+      child: TextFormField(
+        readOnly: read,
+        // controller: key,
+        initialValue: str,
+        decoration: InputDecoration(
+          suffixIcon: const Icon(Icons.edit),
+          hintStyle: GoogleFonts.poppins(
+              color: AppColors.textFieldTextColor, fontSize: 15),
+          border: InputBorder.none,
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
         ),
+        keyboardType: keyboard,
       ),
-      keyboardType: keyboard,
     ),
   );
 }

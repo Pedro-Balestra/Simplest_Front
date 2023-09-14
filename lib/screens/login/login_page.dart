@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                 alignment: Alignment.topRight,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20),
-                  child: wtextButton(),
+                  child: wtextButton("Esqueceu a senha?"),
                 ),
               ),
               const SizedBox(

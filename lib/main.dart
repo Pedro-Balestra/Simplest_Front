@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:simples_front_end/screens/home/home.dart';
@@ -7,6 +8,9 @@ import 'screens/signUp/signUp_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  FirebaseApp CheckFirebaseApp = await Firebase.initializeApp();
+  FirebaseAuth firebaseAuth = FirebaseAuth.instanceFor(app: CheckFirebaseApp);
+  firebaseAuth.setSettings(appVerificationDisabledForTesting: true);
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
