@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:simples_front_end/screens/home/home.dart';
 import 'package:simples_front_end/screens/login/login_page.dart';
+import 'package:simples_front_end/screens/profile/profile_page.dart';
 import 'screens/signUp/signUp_page.dart';
 
 void main() async {
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         'login': (BuildContext context) => const LoginPage(),
         'signUp': (BuildContext context) => const SignUpPage(),
         'home': (BuildContext context) => const Home(),
+        'profile': (BuildContext context) => const ProfilePage(),
       },
     );
   }

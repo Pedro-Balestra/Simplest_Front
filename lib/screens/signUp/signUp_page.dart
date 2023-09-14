@@ -18,6 +18,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController nomeController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController senhaController = TextEditingController();
+  TextEditingController telefoneController = TextEditingController();
   TextEditingController confirmarSenhaController = TextEditingController();
 
   bool obscurePassword1 = true;
@@ -30,9 +31,6 @@ class _SignUpPageState extends State<SignUpPage> {
     String email = emailController.text;
     String senha = senhaController.text.trim();
     String confirmarSenha = confirmarSenhaController.text.trim();
-
-    print("Senha: '$senha'");
-    print("Confirmar Senha: '$confirmarSenha'");
 
     // 2 Passo - Validar os dados
     if (nome.isNotEmpty) {
@@ -140,7 +138,8 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(
                 height: 20,
               ),
-              textFieldContainer("Telefone", TextInputType.phone, null),
+              textFieldContainer(
+                  "Telefone", TextInputType.number, telefoneController),
               const SizedBox(
                 height: 20,
               ),
