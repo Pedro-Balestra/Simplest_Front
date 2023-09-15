@@ -41,11 +41,12 @@ Widget menuDrawer(context, nome) {
             ),
           ),
         ),
-        routesDrawer('Home', 'home', context, Icons.home),
-        routesDrawer('Histórico', 'login', context, Icons.description),
-        routesDrawer('Perfil', 'profile', context, Icons.person),
-        routesDrawer('Sobre Nós', 'login', context, Icons.info_rounded),
-        routesDrawer('Sair', 'login', context, Icons.arrow_circle_left),
+        routesDrawer('Home', 'home', context, Icons.home, false),
+        routesDrawer(
+            'Histórico', 'historic', context, Icons.description, false),
+        routesDrawer('Perfil', 'profile', context, Icons.person, false),
+        routesDrawer('Sobre Nós', 'login', context, Icons.info_rounded, false),
+        routesDrawer('Sair', 'login', context, Icons.arrow_circle_left, true),
       ],
     ),
   );
