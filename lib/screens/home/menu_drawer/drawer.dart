@@ -45,7 +45,7 @@ Widget menuDrawer(context, nome) {
         routesDrawer(
             'Histórico', 'historic', context, Icons.description, false),
         routesDrawer('Perfil', 'profile', context, Icons.person, false),
-        routesDrawer('Sobre Nós', 'login', context, Icons.info_rounded, false),
+        routesDrawer('Sobre Nós', 'about', context, Icons.info_rounded, false),
         routesDrawer('Sair', 'login', context, Icons.arrow_circle_left, true),
       ],
     ),

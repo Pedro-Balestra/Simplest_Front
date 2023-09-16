@@ -84,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
     if (usuario != null) {
       setState(() {
         nome = usuario.displayName!;
-        telefone = usuario.phoneNumber ?? "00000000";
+        telefone = "00000000";
         email = usuario.email!;
       });
     }

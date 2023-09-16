@@ -99,7 +99,7 @@ class _HistoricPageState extends State<HistoricPage> {
   }
 
   pegarUsuario() async {
-    User? usuario = await auth.currentUser;
+    User? usuario = auth.currentUser;
     if (usuario != null) {
       setState(() {
         nome = usuario.displayName!;

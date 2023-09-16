@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:simples_front_end/screens/aboutUs/aboutUs_page.dart';
 import 'package:simples_front_end/screens/historic/historic_page.dart';
 import 'package:simples_front_end/screens/home/home.dart';
 import 'package:simples_front_end/screens/login/login_page.dart';
@@ -29,13 +30,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: 'login',
+      initialRoute: 'about',
       routes: {
         'login': (BuildContext context) => const LoginPage(),
         'signUp': (BuildContext context) => const SignUpPage(),
         'home': (BuildContext context) => const Home(),
         'profile': (BuildContext context) => const ProfilePage(),
         'historic': (BuildContext context) => const HistoricPage(),
+        'about': (BuildContext context) => const AboutUsPage(),
       },
     );
   }
