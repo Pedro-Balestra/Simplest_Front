@@ -7,7 +7,7 @@ Widget animationGears() {
       top: 70,
     ),
     child: Lottie.asset(
-      "assets/lottie/gears2.json",
+      "assets/lottie/gears1.json",
       width: 193,
       height: 193,
       fit: BoxFit.fill,
